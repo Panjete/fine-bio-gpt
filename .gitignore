@@ -1,0 +1,5 @@
+.DS_Store*
+logs*
+outputs*
+__pycache__*
+data*
