@@ -1,0 +1,32 @@
+Gurarmaan Singh Panjeta 
+2020CS50426
+
+I used the Seq2SeqTrainer class from huggingface, which gives a very convenient wrapper for training and finetuning.
+Appropriate parameters were used as suggested by the references below.
+
+The code is split into files whose names justify their purpose : 
+    1. run_model.sh - top script for calling the training/testing
+    2. top.py       - python file which parses arguments and calls appropriate training/testing files
+    3. train.py     - houses the training arguments, the peft arguments, and the creating of datasets and tokenisation, and the training
+    4. biodata.py   - houses the creation and pre-processing of datasets
+    5. test.py      - load the test files, perform inference and save outputs to .txt files
+
+Sections in the "article" section of each datapoint are separated by "\n"s, and the first two sections are the abstract and the introduction.
+These sections are not only a succint representation of the entire article, they are more close to the layman terminology than the rest of the paper.
+Thus, I split the "article" datapoint in sections, and only pass the "introduction" and "abstract" sections to the model.
+Not only does this serve the purpose, it makes inference very fast, and fits neatly into the "512" character limit of the model.
+
+I selected the T5-base model because it was trained on more "general" (layman) texts that bioGPT, which would have generated more bio-oriented results.
+Further, using "auto_batch_size" argument at training time meant that huggingface took care of the memory overflow problem on it's own by adjusting batch size as it felt suitable.
+
+
+
+References :
+
+https://www.kaggle.com/code/pradipdharam/generativeai-llm-finetuning-dialogue-summarization
+
+https://www.philschmid.de/fine-tune-flan-t5-peft
+
+https://medium.com/@levxn/lora-and-qlora-effective-methods-to-fine-tune-your-llms-in-detail-6e56a2a13f3c
+
+
